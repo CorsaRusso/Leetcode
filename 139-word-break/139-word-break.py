@@ -1,6 +1,6 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        words = sorted(wordDict, key=len)
+        words = wordDict
         dp = [1] + [0] * len(s)
         for i in range(1, len(s) + 1):
             for j in words:
