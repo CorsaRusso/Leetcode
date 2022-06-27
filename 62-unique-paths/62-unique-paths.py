@@ -1,5 +1,4 @@
-class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
-        r = m + n - 2
-        k = n - 1
-        return math.floor(math.factorial(r)/(math.factorial(k) * math.factorial(r - k)))
+class Solution(object):
+    def uniquePaths(self, m, n):
+        return (math.factorial(m + n - 2)/(math.factorial(n - 1) * math.factorial(m - 1)))
+        
