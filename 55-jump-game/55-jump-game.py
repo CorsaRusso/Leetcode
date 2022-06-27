@@ -5,8 +5,10 @@ class Solution:
         dp[0] = 1
         for i in range(l):
             if(dp[i] == 1):
-                for j in range(nums[i] + 1):
-                    dp[i + j] = 1
-                    if(dp[l - 1] == 1):
-                        return True
+                if(i + nums[i] + 1 >= l):
+                    return True
+                else:
+                    for j in range(nums[i] + 1):
+                        dp[i + j] = 1
+        print(dp)
         return dp[l - 1]
