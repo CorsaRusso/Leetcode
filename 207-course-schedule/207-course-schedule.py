@@ -1,12 +1,13 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         preMap = {}
+        visited = set()
         for i in range(numCourses):
             preMap[i] = []
         for i in prerequisites:
             preMap[i[0]].append(i[1])
         # print(preMap)
-        def dfs(crs, visited):
+        def dfs(crs):
             # print("___")
             # print("CRS:",crs)
             # print("preMap:", preMap)
@@ -14,22 +15,21 @@ class Solution:
             if crs in visited:
                 # print("visited")
                 return False
-            visited.add(crs)
             if(not preMap[crs]):
                 # print("emptied")
                 return True
-
+            visited.add(crs)
             for i in preMap[crs]:
-                visited2 = visited.copy()
-                if (not dfs(i, visited2)):
+                if (not dfs(i)):
                     return False
+
+            visited.remove(crs)
             preMap[crs] = []
             
             return True
         for i in prerequisites:
             # print("LOOP BEGIN")
-            visited = set()
-            if(not dfs(i[0], visited)):
+            if(not dfs(i[0])):
                 return False
             # print("LOOP END")
         return True
