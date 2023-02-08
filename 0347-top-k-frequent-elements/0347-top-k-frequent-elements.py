@@ -12,20 +12,12 @@ class Solution(object):
         # Input: nums = [1,1,1,2,2,3], k = 2
         # Output: [1,2]
         
-        frequency = {}
-        for i in range(len(nums)):
-            frequency[i+1] = set()
-        nums_dict = {}
+        dic = {}
         for i in nums:
-            if i in nums_dict:
-                frequency[nums_dict[i]].remove(i)
-                nums_dict[i] += 1
+            if i in dic:
+                dic[i] = dic[i] +1
             else:
-                nums_dict[i] = 1
-            frequency[nums_dict[i]].add(i)
+                dic[i] = 1
         
-        retval = []
-        for i in range(len(nums)):
-            retval += list(frequency[i+1])
-            
-        return retval[-k:]
+        arr = sorted(dic, key = dic.get,reverse = True)
+        return(arr[:k])
