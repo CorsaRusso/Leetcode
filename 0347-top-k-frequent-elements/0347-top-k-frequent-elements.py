@@ -11,13 +11,21 @@ class Solution(object):
         # at the start this is empty {}
         # Input: nums = [1,1,1,2,2,3], k = 2
         # Output: [1,2]
-        frq = defaultdict(list)
-        for key, cnt in Counter(nums).items():
-            frq[cnt].append(key)
-
-        res = []
-        for times in reversed(range(len(nums) + 1)):
-            res.extend(frq[times])
-            if len(res) >= k: return res[:k]
-
-        return res[:k]
+        
+        frequency = {}
+        for i in range(len(nums)):
+            frequency[i+1] = set()
+        nums_dict = {}
+        for i in nums:
+            if i in nums_dict:
+                frequency[nums_dict[i]].remove(i)
+                nums_dict[i] += 1
+            else:
+                nums_dict[i] = 1
+            frequency[nums_dict[i]].add(i)
+        
+        retval = []
+        for i in range(len(nums)):
+            retval += list(frequency[i+1])
+            
+        return retval[-k:]
