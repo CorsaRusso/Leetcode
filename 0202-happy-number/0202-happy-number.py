@@ -4,18 +4,13 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        def step(n):
-            retval = 0
-            while n != 0:
-                retval += (n % 10) * (n % 10)
-                n = n // 10
-            return retval
-        fast_p = n
-        slow_p = n
-        while fast_p != 1 and step(fast_p) != 1:
-            fast_p = step(step(fast_p))
-            slow_p = step(slow_p)
-            if fast_p == slow_p:
+        mem = set()
+        while n != 1:
+            n = sum([int(i) ** 2 for i in str(n)])
+            if n in mem:
                 return False
-        return True
+            else:
+                mem.add(n)
+        else:
+            return True
         
